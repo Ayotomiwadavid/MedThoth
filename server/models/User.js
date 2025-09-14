@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     gender: {type: String, required: true}, 
     dob: {type: Date, required: true},
-    role: {type: String, enum: ['admin', 'doctor', 'patient'], required: true}
+    role: {type: String, enum: ['admin', 'doctor', 'patient'], required: true},
+    status: {type: String, enum: ['active', 'inactive', 'suspended'], default: 'active'},
 }, {timestamps: true});
 
 // Virtual field for age

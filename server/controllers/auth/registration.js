@@ -20,7 +20,8 @@ const register = async (req, res) => {
             password: hashedPassword,
             gender,
             dob,
-            role
+            role,
+            status: role === 'doctor'?'inactive':'active'
         });
 
         await newUser.save();

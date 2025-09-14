@@ -30,7 +30,9 @@ const doctorSchema = new mongoose.Schema({
       stars: Number,
       createdAt: { type: Date, default: Date.now }
     }
-  ]
+  ],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Doctor', doctorSchema);
