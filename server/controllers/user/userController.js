@@ -1,4 +1,5 @@
 const User = require('../../models/User');
+const Doctor = require('../../models/Doctor');
 
 // Get All Users
 const getAllUsers = async (req, res) => {
@@ -39,8 +40,25 @@ const updateUserById = async (req, res) => {
     }
 }
 
+// Search Doctors by Specialty, Location, Availability, Consultation Fee
+const searchDoctors = async (req, res) => {
+    try {
+        const { specialty, location, availability, consultationFee } = req.query;
+        let filter = { role: 'doctor' };
+        if (specialty) filter.specialty = specialty;
+        if (location) filter.location = location;
+        if (availability) filter.availability = availability;
+        if (consultationFee) filter.consultationFee = { $lte: consultationFee };
+        const doctors = await Doctor.find(filter);
+        res.status(200).json(doctors);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getAllUsers,
     getUserById,
-    updateUserById
+    updateUserById,
+    searchDoctors,
 }
